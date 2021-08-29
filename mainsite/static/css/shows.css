@@ -1,0 +1,47 @@
+table {
+    border: 3px solid darkgray;
+    border-collapse: collapse;
+    width: 95%;
+}
+
+tr {
+    display: flex;
+}
+
+.table1 { flex: 1 }
+.table2 { flex: 2 }
+
+th {
+    background-color: #343F3E;
+    border-right: solid 1px #3F3F3E;
+    color: #F9EAE1;
+    font-size: large;
+    padding: 0.5rem;
+}
+
+td {
+    border-right: solid 1px #3F3F3E;
+    font-size: large;
+    padding: 0.2rem 0.5rem;
+    width: 100%;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #8AB8AE;
+}
+
+.links {
+    display: flex;
+    padding: 0.2rem 0;
+}
+
+.subtd {
+    flex: 1;
+    border-right: solid 1px #3F3F3E;
+    text-align: center;
+}
+
+#new-show {
+    display: block;
+    margin: 1.5rem 0;
+}

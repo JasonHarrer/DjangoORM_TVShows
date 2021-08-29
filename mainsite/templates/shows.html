@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Semi-Restful TV Shows assignment">
+        <title>TV Shows</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/default.css' %}">
+        <link rel="stylesheet" href="{% static 'css/shows.css' %}">
+    </head>
+    <body>
+        <h1>All Shows</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th class="table1">ID</th>
+                    <th class="table2">Title</th>
+                    <th class="table1">Network</th>
+                    <th class="table1">Release Date</th>
+                    <th class="table1">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for show in shows %}
+                    <tr>
+                        <td class="table1">
+                            <a href="/shows/{{show.id}}">{{show.id}}</a>
+                        </td>
+                        <td class="table2">{{show.title}}</td>
+                        <td class="table1">{{show.network.name}}</td>
+                        <td class="table1">{{show.release_date}}</td>
+                        <td class="table1 links">
+                            <a href="/shows/{{show.id}}" class="subtd">Show</a>
+                            <a href="/shows/{{show.id}}/edit" class="subtd">Edit</a>
+                            <a href="/shows/{{show.id}}/delete" class="subtd">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a id="new-show" href="/shows/new">Add a New Show</a>
+    </body>
+</html>

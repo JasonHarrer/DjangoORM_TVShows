@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+body {
+    padding: 2%;
+}
+
+h1 {
+    font-size: xx-large;
+    margin-bottom: 1.5rem;
+}
+

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <title>TV Shows - Confirm Delete</title>
+    </head>
+    <body>
+        <h1>Do you really wish to delete {{show.name}}?</h1>
+        <h2>This will permanently remove this record from the database.  You will not be able to undo this action.</h2>
+        <a href="/shows/{{show.id}}/destroy"><button id="yes">Yes, continue deleting this show.</button></a>
+        <a href="/shows/{{show.id}}"><button id="no">No, on second thought, take me back to the show page.</button</a>
+    </body>
+</html>
+

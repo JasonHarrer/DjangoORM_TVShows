@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="TV Show Assignment - {{title}}">
+        <title>{{title}}</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/default.css' %}">
+        <link rel="stylesheet" href="{% static 'css/show_edit.css' %}">
+    </head>
+    <body>
+        <h1>{{title}}</h1>
+        <form method=POST action="{{action}}">
+            {% csrf_token %}
+            <div>
+                <label for="title">Title</label>
+                <input type="text" name="title" placeholder="Enter TV Show Title" value="{{show.title}}">
+            </div>
+            <div>
+                <span>
+                    <label for="network">Network</label>
+                    <select name="network" value="{{show.network.id}}">
+                        {% for network in networks %}
+                            <option value="{{network.id}}">{{network.name}}</option>
+                        {% endfor %}
+                    </select>
+                </span>
+                <span>
+                    <label for="release_date">Release Date</label>
+                    <input type="date" name="release_date" value={{show.release_date|date:"Y-m-d"}}>
+                </span>
+            </div>
+            <div>
+                <label for="description">Description</label>
+                <textarea name="description" placeholder="Enter a brief summary of the TV show">{{show.description}}</textarea>
+            </div>
+            <input type="submit" value="{{submit}}">
+            <a href="/shows/{{show.id}}">Go to Show</a>
+        </form>
+    </body>
+</html>

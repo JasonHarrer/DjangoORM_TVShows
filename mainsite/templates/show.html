@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="TV Show Assignment: Individual show page">
+        <title>TV Shows - {{show.title}}</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/default.css' %}">
+        <link rel="stylesheet" href="{% static 'css/show.css' %}">
+    </head>
+    <body>
+        <h1>TV Show {{show.id}}</h1>
+        <p>Title: {{show.title}}</p>
+        <p>Network: {{show.network.name}}</p>
+        <p>Release Date: {{show.release_date}}</p>
+        <p>Description: {{show.description}}</p>
+        <p>Last Updated: {{show.updated_at}}</p>
+        <div>
+            <a href="/shows/{{show.id}}/edit">Edit</a> |
+            <a href="/shows/{{show.id}}/delete">Delete</a>
+        </div>
+    </body>
+</html>
+
