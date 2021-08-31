@@ -1,5 +1,23 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import *
+
+
+new_context = {
+                'title':    'Add A New TV Show',
+                'action':   '/shows/create',
+                'submit':   'Create',
+                'networks': Network.objects.all(),
+                'show':     {
+                              'title':        '',
+                              'network':      '',
+                              'release_date': '',
+                              'description':  '',
+                            }
+              }
+
+
+
 
 # Create your views here.
 
@@ -20,7 +38,14 @@ def shows_new(request):
               }
     return render(request, 'show_new.html', context)
 
+
 def shows_create(request):
+    errors = TVShow.objects.validate(request.POST)
+    if len(errors) > 0:
+        for value in errors.values():
+            messages.error(request, value)
+        return redirect(f'/shows/new')
+
     network = Network.objects.get(id=request.POST['network'])
     newshow = TVShow.objects.create(title=request.POST['title'],
                                     network=network,
@@ -38,34 +63,32 @@ def show(request, show_id):
 
 
 def shows_new(request):
-    context = {
-                'title':    'Add A New TV Show',
-                'action':   '/shows/create',
-                'submit':   'Create',
-                'networks': Network.objects.all(),
-                'show':     {
-                              'title':        '',
-                              'network':      '',
-                              'release_date': '',
-                              'description':  '',
-                            }
-              }
-    return render(request, 'show_edit.html', context)
+    return render(request, 'show_edit.html', new_context)
+
+
+def set_edit_context(show_id):
+    edit_context = {
+                     'title':    f'Edit Show {show_id}',
+                     'action':   f'/shows/{show_id}/update',
+                     'submit':   'Update',
+                     'networks': Network.objects.all(),
+                     'show':     TVShow.objects.get(id=show_id)
+                   }
+    return edit_context
 
 
 def show_edit(request, show_id):
-    context = {
-                'title':    f'Edit Show {show_id}',
-                'action':   f'/shows/{show_id}/update',
-                'submit':   'Update',
-                'networks': Network.objects.all(),
-                'show':     TVShow.objects.get(id=show_id)
-              }
+    context = set_edit_context(show_id)
     return render(request, 'show_edit.html', context)
 
 
-
 def show_update(request, show_id):
+    errors = TVShow.objects.validate(request.POST)
+    if len(errors) > 0:
+        for value in errors:
+            messages.error(request, value)
+        return redirect(f'/shows/{show_id}/edit')
+
     show = TVShow.objects.get(id=show_id)
     # Only update the db if any of the data changed
     if (show.title != request.POST['title'] or

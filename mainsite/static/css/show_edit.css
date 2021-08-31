@@ -41,3 +41,18 @@ a {
     margin: 1rem auto;
     text-align: center;
 }
+
+#messages {
+    background-color: #F1E4F3;
+    border-radius: 0.3rem;
+    margin-bottom: 2rem;
+    padding: 0.1rem;
+}
+
+li {
+   margin: 0.3rem 2rem;
+}
+
+.error {
+    color: #FF0000;
+}
