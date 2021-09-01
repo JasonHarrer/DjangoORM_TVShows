@@ -7,6 +7,8 @@
         {% load static %}
         <link rel="stylesheet" href="{% static 'css/default.css' %}">
         <link rel="stylesheet" href="{% static 'css/show_edit.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="{% static 'js/show_edit.js' %}"></script>
     </head>
     <body>
         {% if messages %}
@@ -25,12 +27,13 @@
             <input type="hidden" name="edit-type" value={{submit}}>
             <div>
                 <label for="title">Title</label>
-                <input type="text" name="title" placeholder="Enter TV Show Title" value="{{show.title}}">
+                <input type="text" name="title" id="title" placeholder="Enter TV Show Title" value="{{show.title}}" required>
+                <h4 class="error" id="title-error">This title already exists.  If you wish to change this title, please edit the existing entry instead.</h4>
             </div>
             <div>
                 <span>
                     <label for="network">Network</label>
-                    <select name="network" value="{{show.network.id}}">
+                    <select name="network" id="network" value="{{show.network.id}}" required>
                         <option value="">Select a Network...</option>
                         {% for network in networks %}
                         <option value="{{network.id}}" {% if network.id == show.network.id %}selected{% endif %}>{{network.name}}</option>
@@ -39,12 +42,12 @@
                 </span>
                 <span>
                     <label for="release_date">Release Date</label>
-                    <input type="date" name="release_date" value={{show.release_date|date:"Y-m-d"}}>
+                    <input type="date" name="release_date" id="release_date" value={{show.release_date|date:"Y-m-d"}} required>
                 </span>
             </div>
             <div>
                 <label for="description">Description</label>
-                <textarea name="description" placeholder="Enter a brief summary of the TV show">{{show.description}}</textarea>
+                <textarea name="description" id="description" placeholder="Enter a brief summary of the TV show">{{show.description}}</textarea>
             </div>
             <input type="submit" value="{{submit}}">
             {% if submit == "Update" %}

@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .models import *
 
@@ -112,3 +113,7 @@ def show_destroy(request, show_id):
     show = TVShow.objects.get(id=show_id)
     show.delete()
     return redirect('/shows')
+
+
+def api_show_exists(request, title):
+    return JsonResponse({ 'exists': (TVShow.objects.filter(title=title).count() > 0)})

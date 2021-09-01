@@ -11,4 +11,5 @@ urlpatterns = [
                 path('shows/<int:show_id>/update',         show_update),
                 path('shows/<int:show_id>/delete',         show_delete),
                 path('shows/<int:show_id>/destroy',        show_destroy),
+                path('api/shows/exists/<str:title>',      api_show_exists)
               ]
