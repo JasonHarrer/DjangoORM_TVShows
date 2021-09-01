@@ -1,21 +1,19 @@
-$(document).ready(init())
-
-
-function init() {
+$(document).ready(function() {
     console.log("Initializing...")
-    $("#title").change(validateTitle)
+    $("#title").keyup(validateTitle)
     console.log("Done.")
-}
+})
 
 
 function validateTitle() {
-    console.log("validating title")
     newShowTitle = $("#title").val()
+    console.log("validating title: " + newShowTitle)
     $.ajax("/api/shows/exists/" + newShowTitle).done(function(response) {
+        console.log(response)
         if (response.exists == true) {
-           $("#title-error").attr("display", "block") 
+           $("#title-error").show()
         } else {
-            $("#title-error").attr("display", "none")
+            $("#title-error").hide()
         }
     })
     
